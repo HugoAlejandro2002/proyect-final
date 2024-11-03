@@ -5,5 +5,14 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+    "crewai>=0.76.9",
+    "crewai-tools>=0.13.4",
     "icrawler>=0.6.9",
+    "ultralytics>=8.3.27",
+    "fastapi[standard]>=0.115.4",
+    "numpy>=1.26.4",
+    "joblib>=1.4.2",
+    "albumentations>=1.4.21",
+    "opencv-python-headless>=4.10.0.84",
+    "openai>=1.53.0",
 ]
