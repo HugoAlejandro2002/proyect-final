@@ -1,0 +1,11 @@
+routine_task:
+  description: >
+    Create a personalized training and diet plan for {first_name} {last_name}, a {age}-year-old {gender}. 
+    This plan should be based on their body type, fitness goals, current physical activity level of {physical_activity_per_week} times per week, 
+    and specific dietary preferences or restrictions: {dietary_restrictions}. Include recommendations that align with their flavor preferences: {flavor_preferences}.
+    The goal for this user is to {objective}, so ensure the plan is optimized for this outcome.
+  expected_output: >
+    A comprehensive and detailed training and diet plan, including recommended exercises, detailed workout routines, and personalized meal options that account for dietary preferences and restrictions.
+    The plan should be practical, achievable, and motivating, providing variety in both workouts and meals to support long-term adherence.
+  agent: routine_agent
+  async_execution: false
