@@ -1,15 +1,13 @@
 from fastapi import FastAPI
 from src.core.init_app import create_app
 from src.core.settings import get_settings
-# from app.api.v1.endpoints import routine, models  # Importación de los routers
+from src.api import routes
 
 SETTINGS = get_settings()
-# Crear la instancia de la aplicación
+
 app = create_app()
 
-# Incluir routers en la aplicación
-# app.include_router(routine.router, prefix="/v1/routines", tags=["Routines"])
-# app.include_router(models.router, prefix="/v1/models", tags=["Models"])
+app.include_router(routes.router, prefix="/v1")
 
 @app.get("/")
 async def root():
