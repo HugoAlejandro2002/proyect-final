@@ -15,4 +15,5 @@ dependencies = [
     "albumentations>=1.4.21",
     "opencv-python-headless>=4.10.0.84",
     "openai>=1.53.0",
+    "colorlog>=6.9.0",
 ]
