@@ -10,10 +10,11 @@ dependencies = [
     "icrawler>=0.6.9",
     "ultralytics>=8.3.27",
     "fastapi[standard]>=0.115.4",
-    "numpy>=1.26.4",
     "joblib>=1.4.2",
     "albumentations>=1.4.21",
     "opencv-python-headless>=4.10.0.84",
     "openai>=1.53.0",
     "colorlog>=6.9.0",
+    "numpy>=1.26.4",
+    "scikit-learn>=1.5.2",
 ]

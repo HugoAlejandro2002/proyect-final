@@ -1,41 +1,27 @@
 
-from fastapi import  APIRouter, Form, UploadFile, File
+from fastapi import  APIRouter, Depends, Form, HTTPException, UploadFile, File
 from fastapi.responses import JSONResponse
-import cv2
-import numpy as np
+
+from src.ia_models.orchestrator import Orchestrator
 from src.schemas.user import UserCreate, UserCreated
+from src.ia_models.orchestrator import get_orquestator
+from src.services.body_type_service import BodyTypeService
 
 router = APIRouter()
 
-@router.post("/generate-routine", response_model=UserCreated)
-async def classify_body_type(
+@router.post("/analyze-body-type", response_model=UserCreated)
+async def analyze_body_type(
     user_data = Form(...), 
-    image: UploadFile = File(...)
+    image: UploadFile = File(...),
+    orchestrator = Depends(get_orquestator)
 ):
-    
-    
-    return JSONResponse(content={"a":"aaa"})
+    # Leer la imagen cargada
+    body_type_service = BodyTypeService(orchestrator=orchestrator)
+    image_bytes = await image.read()
 
+    result = body_type_service.process_image_and_classify(image_bytes)
 
-# def generate_diet_plan(body_type: str, user_data: UserCreate) -> str:
-#     diet_recommendation = ""
-
-#     if body_type == "slim" and user_data.objective == "muscle gain":
-#         diet_recommendation += "High protein, balanced carbs and fats for muscle gain. "
-#     elif body_type == "fat" and user_data.objective == "weight loss":
-#         diet_recommendation += "Low carb, high fiber diet with moderate protein for weight loss. "
-#     elif body_type == "fit":
-#         diet_recommendation += "Balanced diet to maintain fitness level. "
-    
-#     if user_data.dietary_restrictions:
-#         if "vegetarian" in user_data.dietary_restrictions:
-#             diet_recommendation += "Ensure sufficient plant-based protein intake. "
-#         if "vegan" in user_data.dietary_restrictions:
-#             diet_recommendation += "Focus on vegan protein sources like beans, lentils, and tofu. "
-#         if "halal" in user_data.dietary_restrictions:
-#             diet_recommendation += "Ensure all sources of meat are halal-certified. "
-
-#     if user_data.flavor_preferences:
-#         diet_recommendation += f"Include more {', '.join(user_data.flavor_preferences)} options to suit your taste preferences. "
-
-#     return diet_recommendation
+    # response_data = user_data.dict()
+    # response_data["id"] = 1  # Simulación de un ID generado
+    # response_data.update({"body_type_result": result})
+    return JSONResponse(content={"body_type_result": result})
