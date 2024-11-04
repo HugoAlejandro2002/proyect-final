@@ -1,4 +1,5 @@
 from functools import cache
+from typing import ClassVar
 from pydantic_settings import BaseSettings
 from pydantic_settings import SettingsConfigDict
 
@@ -11,7 +12,7 @@ class Settings(BaseSettings):
     rf_classifier_path: str = "model_artifacts/body_type_classifier.pkl"
     yolo_pose_path: str = "model_artifacts/yolo11n-pose.pt"
     yolo_human_path: str = "model_artifacts/yolov8n.pt"
-
+    llm: ClassVar[str]= "gpt-4o"
 
     model_config = SettingsConfigDict(env_file=".env")
 
