@@ -2,7 +2,7 @@ from crewai import Agent, Crew, Task, Process
 from crewai.project import CrewBase, agent, crew, task
 from src.utils.pdf_search_tool import get_pdf_search_tool
 from pydantic import BaseModel, Field
-
+from crewai_tools import PDFSearchTool
 
 class RoutinePlanOutput(BaseModel):
     """Modelo de salida para la rutina y dieta personalizada"""
@@ -22,7 +22,7 @@ class RoutineCrew:
         """Define el agente que generará las rutinas"""
         return Agent(
             config=self.agents_config['routine_agent'],
-            tools=[get_pdf_search_tool],
+            tools=[PDFSearchTool(file_path="get-fit-life.pdf")],
             verbose=True,
         )
 
