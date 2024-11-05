@@ -2,6 +2,7 @@ from typing import List, Optional
 from pydantic import BaseModel, Field, ConfigDict
 from typing_extensions import Annotated
 from enum import Enum
+from fastapi import Form
 
 class GenderEnum(str, Enum):
     male = "male"
@@ -60,8 +61,31 @@ class UserBase(BaseModel):
 
     model_config = ConfigDict(from_attributes=True)
 
-class UserCreate(UserBase):
-    pass
+class UserInfoBody(UserBase):
+    @classmethod
+    def as_form(
+        cls,
+        first_name: str = Form(..., description="First name"),
+        last_name: str = Form(..., description="Last name"),
+        email: str = Form(..., description="Email address"),
+        age: int = Form(..., ge=10, le=100, description="Age of the user"),
+        gender: GenderEnum = Form(..., description="Gender"),
+        height: float = Form(..., ge=100, le=250, description="Height in cm"),
+        physical_activity_per_week: int = Form(..., ge=0, le=14, description="Physical activity frequency per week"),
+        dietary_restrictions: Optional[List[str]] = Form(None, description="Dietary restrictions"),
+        flavor_preferences: Optional[List[str]] = Form(None, description="Flavor preferences"),
+        objective: Optional[str] = Form(..., description="User's fitness objective"),
+    ) -> "UserInfoBody":
+        return cls(
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            age=age,
+            gender=gender,
+            height=height,
+            physical_activity_per_week=physical_activity_per_week,
+            dietary_restrictions=dietary_restrictions,
+            flavor_preferences=flavor_preferences,
+            objective=objective,
+        )
 
-class UserCreated(UserBase):
-    id: Annotated[int, Field(..., ge=1, examples=[1])]

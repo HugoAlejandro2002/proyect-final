@@ -1,11 +1,23 @@
 routine_task:
   description: >
-    Create a personalized training and diet plan for {first_name} {last_name}, a {age}-year-old {gender}. 
-    This plan should be based on their body type, fitness goals, current physical activity level of {physical_activity_per_week} times per week, 
-    and specific dietary preferences or restrictions: {dietary_restrictions}. Include recommendations that align with their flavor preferences: {flavor_preferences}.
-    The goal for this user is to {objective}, so ensure the plan is optimized for this outcome.
+    Create a personalized training and diet plan for {first_name} {last_name}, a {age}-year-old {gender} with a body type classified as {body_type}. 
+    They have a height of {height} cm and engage in physical activity approximately {physical_activity_per_week} times per week. The plan should be customized 
+    to align with their dietary restrictions or preferences, which include: {dietary_restrictions}, and flavor preferences, focusing on: {flavor_preferences}.
+    
+    The primary goal for this user is to {objective}. Design a program that maximizes their progress toward this objective, considering their unique body type and current lifestyle. 
+    Ensure the plan is sustainable and enjoyable, promoting adherence and gradual progression. For the training aspect, include exercises suited to their {body_type}, 
+    recommending specific workout types, frequency, and intensity levels that will yield the best results based on their physique.
+
+    For the diet plan, provide specific meal recommendations with portion guidelines that align with their preferences and dietary needs. 
+    Include guidance on nutrient timing, meal preparation tips, and suggested snacks to support energy levels, recovery, and overall health. 
+
+    Use motivating language to empower {first_name} and emphasize the long-term benefits of their fitness journey, with specific suggestions for their {body_type}.
   expected_output: >
-    A comprehensive and detailed training and diet plan, including recommended exercises, detailed workout routines, and personalized meal options that account for dietary preferences and restrictions.
-    The plan should be practical, achievable, and motivating, providing variety in both workouts and meals to support long-term adherence.
+    A detailed, achievable training and diet plan tailored for {first_name}'s unique profile, including specific workout routines suited to their {body_type}, 
+    structured meal plans, and actionable tips that align with their physical activity level, body type, and goal to {objective}. The plan should provide 
+    guidance on exercise frequency, intensity, and progression, along with meal planning that respects their dietary restrictions and flavor preferences.
+    
+    Additionally, outline a progression strategy for training intensity and dietary adjustments over weeks or months to support continuous improvement. 
+    The final output should be well-structured, practical, and empowering, helping the user embark on and sustain their fitness journey with confidence.
   agent: routine_agent
   async_execution: false
