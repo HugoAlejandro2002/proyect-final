@@ -1,6 +1,5 @@
 from crewai import Agent, Crew, Task, Process
 from crewai.project import CrewBase, agent, crew, task
-from src.utils.pdf_search_tool import get_pdf_search_tool
 from pydantic import BaseModel, Field
 from crewai_tools import PDFSearchTool
 
